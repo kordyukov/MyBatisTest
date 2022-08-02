@@ -3,13 +3,34 @@
 <mapper namespace="com.example.test_hibernate.demo.repo.TestRepo">
 
     <resultMap id="BaseResultMap" type="com.example.test_hibernate.demo.entity.Test" autoMapping="true">
-        <id property="id" column="id"/>
+        <result property="id" column="id"/>
         <result property = "name" column = "name"/>
         <result property = "fio" column = "fio"/>
     </resultMap>
+
+    <sql id="baseCarrierFields">
+        id, name, fio
+    </sql>
     
     <select id="findAll" resultMap="BaseResultMap">
         select * from test
     </select>
+
+    <sql id="baseCarrier">
+        #{test.name},
+        #{test.fio}
+    </sql>
+    <sql id="baseCarrierInsert">
+        name,
+        fio
+    </sql>
+    
+    <insert id="save">
+        INSERT INTO test (
+        <include refid="baseCarrierInsert"/>
+        )
+        VALUES
+        (<include refid="baseCarrier"/>)
+    </insert>
 
 </mapper>

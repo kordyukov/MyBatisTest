@@ -20,5 +20,10 @@ public class TestPostgres {
       return testRepo.findAll();
     }
 
+    @PostMapping
+    public void save(@RequestBody Test test){
+       testRepo.save(test);
+    }
+
 
 }

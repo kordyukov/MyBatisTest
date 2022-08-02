@@ -1,2 +1,6 @@
-create sequence hibernate_sequence start 1 increment 1;
-create table test (id int4 not null, fio varchar(255), name varchar(255), primary key (id));
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
+create table test (
+    id uuid primary key not null default uuid_generate_v4(),
+    name text not null,
+    fio text not null);
